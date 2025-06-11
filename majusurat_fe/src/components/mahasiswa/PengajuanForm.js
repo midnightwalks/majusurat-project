@@ -33,7 +33,7 @@ const PengajuanForm = ({ onSuccess }) => {
         formData.append("dokumen_pendukung", form.dokumen_pendukung);
       }
 
-      
+const token = localStorage.getItem("token");
 await api.post("/pengajuan-surat", formData, {
   headers: {
     "Content-Type": "multipart/form-data",
