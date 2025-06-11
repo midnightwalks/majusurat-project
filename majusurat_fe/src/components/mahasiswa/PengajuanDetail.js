@@ -15,14 +15,6 @@ const PengajuanDetail = ({ pengajuan, onClose }) => {
         <p><span className="font-medium">Status:</span> <PengajuanStatusBadge status={pengajuan.status} /></p>
         {pengajuan.dokumen_pendukung && (
           <p>
-            <a
-              href={pengajuan.dokumen_pendukung}
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 underline"
-            >
-              Lihat Dokumen Pendukung
-            </a>
           </p>
         )}
       </div>
