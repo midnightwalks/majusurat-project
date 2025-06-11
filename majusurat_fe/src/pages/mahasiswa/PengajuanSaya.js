@@ -9,14 +9,26 @@ const PengajuanSaya = () => {
   const [selected, setSelected] = useState(null);
 
   const fetchData = async () => {
-    try {
-      const res = await api.get("/pengajuan-surat");
-      setData(res.data.data.filter((item) => item.user?.role === "mahasiswa"));
-    } catch (err) {
-      console.error(err);
-      alert("Gagal mengambil data pengajuan");
+  try {
+    const res = await api.get("/pengajuan-surat");
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !user.id_user) {
+      alert("User belum login");
+      return;
     }
-  };
+
+    // Filter hanya pengajuan milik user ini
+    const filtered = res.data.data.filter(
+      (item) => item.user?.id_user === user.id_user
+    );
+
+    setData(filtered);
+  } catch (err) {
+    console.error(err);
+    alert("Gagal mengambil data pengajuan");
+  }
+};
 
   useEffect(() => {
     fetchData();
