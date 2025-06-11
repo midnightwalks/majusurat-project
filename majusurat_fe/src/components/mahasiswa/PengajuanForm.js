@@ -33,9 +33,13 @@ const PengajuanForm = ({ onSuccess }) => {
         formData.append("dokumen_pendukung", form.dokumen_pendukung);
       }
 
-      await api.post("/pengajuan-surat", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      
+await api.post("/pengajuan-surat", formData, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+    Authorization: `Bearer ${token}`,
+  },
+});
 
       alert("Pengajuan berhasil dikirim");
       onSuccess();
