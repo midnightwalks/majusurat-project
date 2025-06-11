@@ -28,7 +28,7 @@ api.interceptors.response.use(
     ) {
       originalRequest._retry = true;
       try {
-        const res = await axios.get("http://localhost:5000/token", {
+        const res = await axios.get("https://project-majusurat-be-901699795850.us-central1.run.app/token", {
           withCredentials: true,
         });
         const newAccessToken = res.data.accessToken;
