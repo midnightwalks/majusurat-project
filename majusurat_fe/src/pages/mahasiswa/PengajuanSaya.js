@@ -9,26 +9,31 @@ const PengajuanSaya = () => {
   const [selected, setSelected] = useState(null);
 
   const fetchData = async () => {
-  try {
-    const res = await api.get("/pengajuan-surat");
-    const user = JSON.parse(localStorage.getItem("user"));
+    try {
+      const token = localStorage.getItem("accessToken"); // ambil token dari localStorage
+      const user = JSON.parse(localStorage.getItem("user"));
 
-    if (!user || !user.id_user) {
-      alert("User belum login");
-      return;
+      if (!token || !user || !user.id_user) {
+        alert("User belum login");
+        return;
+      }
+
+      const res = await api.get("/pengajuan-surat", {
+        headers: {
+          Authorization: `Bearer ${token}`, // tambahkan bearer token
+        },
+      });
+
+      const filtered = res.data.data.filter(
+        (item) => item.user?.id_user === user.id_user
+      );
+
+      setData(filtered);
+    } catch (err) {
+      console.error(err);
+      alert("Gagal mengambil data pengajuan");
     }
-
-    // Filter hanya pengajuan milik user ini
-    const filtered = res.data.data.filter(
-      (item) => item.user?.id_user === user.id_user
-    );
-
-    setData(filtered);
-  } catch (err) {
-    console.error(err);
-    alert("Gagal mengambil data pengajuan");
-  }
-};
+  };
 
   useEffect(() => {
     fetchData();
