@@ -7,7 +7,12 @@ const LogAktivitas = () => {
 
   const fetchLogs = async () => {
     try {
-      const res = await api.get("/log-pengajuan");
+      const token = localStorage.getItem("token");
+      const res = await api.get("/log-pengajuan", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
       setLogs(res.data.data);
     } catch (err) {
       alert("Gagal mengambil log");
