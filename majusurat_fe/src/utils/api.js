@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken, saveToken, removeToken } from "./auth";
 
 const api = axios.create({
-  baseURL: "https://majusurat-be-901699795850.us-central1.run.app",
+  baseURL: "https://majusurat-backend-901699795850.us-central1.run.app",
   withCredentials: true,
 });
 
