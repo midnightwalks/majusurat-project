@@ -9,10 +9,10 @@ const LogAktivitas = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await api.get("/log-pengajuan", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setLogs(res.data.data);
     } catch (err) {
       alert("Gagal mengambil log");
@@ -35,16 +35,14 @@ const LogAktivitas = () => {
               <thead className="bg-gray-100 text-left">
                 <tr>
                   <th className="p-3 border">Tanggal</th>
-                  <th className="p-3 border">Admin</th>
                   <th className="p-3 border">Aksi</th>
-                  <th className="p-3 border">Keperluan</th>
                   <th className="p-3 border">Alasan</th>
                 </tr>
               </thead>
               <tbody>
                 {logs.length === 0 ? (
                   <tr>
-                    <td colSpan="5" className="text-center p-4 text-gray-400">
+                    <td colSpan="3" className="text-center p-4 text-gray-400">
                       Belum ada log aktivitas.
                     </td>
                   </tr>
@@ -57,11 +55,9 @@ const LogAktivitas = () => {
                       <td className="p-3 border">
                         {new Date(log.waktu_aksi).toLocaleString("id-ID")}
                       </td>
-                      <td className="p-3 border">{log.user?.name}</td>
                       <td className="p-3 border font-semibold capitalize text-blue-600">
                         {log.aksi_admin}
                       </td>
-                      <td className="p-3 border">{log.pengajuan?.keperluan_surat}</td>
                       <td className="p-3 border text-gray-600">
                         {log.alasan || "-"}
                       </td>
