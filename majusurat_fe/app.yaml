@@ -1,14 +1,2 @@
 runtime: nodejs20
 service: majusurat-fe 
-instance_class: F1
-
-handlers:
-  - url: /
-    static_files: dist/index.html
-    upload: dist/index.html
-
-  - url: /(.*)
-    static_files: dist/\1
-    upload: dist/(.*)
-
-default_expiration: "1h"
