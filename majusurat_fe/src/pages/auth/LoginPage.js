@@ -15,6 +15,8 @@ const LoginPage = () => {
     try {
       const res = await api.post("/login", form);
       saveToken(res.data.accessToken);
+      localStorage.setItem("user", JSON.stringify(res.data.data));
+
       const role = getUserRole();
 
       if (role === "admin") navigate("/admin");
